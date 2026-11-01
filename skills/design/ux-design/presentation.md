@@ -1,7 +1,7 @@
 # Where a feature opens
 
-Code for each row of the surface table in [SKILL.md](SKILL.md). It compiles
-on macOS 26 with Swift 6.2 and main-actor default isolation (the
+Code for each row of the surface table in [SKILL.md](SKILL.md). It typechecks
+with Swift 6.4 (Xcode 27) and main-actor default isolation (the
 `new-mac-app` template). `Item` is the template's SwiftData model, with a
 `dueDate: Date` field added for the popover example.
 
@@ -47,13 +47,15 @@ View > Show Inspector, Control-Command-I.
 ```swift
 List(items, selection: $selection) { item in ItemRow(item: item) }
     .inspector(isPresented: $showInspector) {
-        if let item = selection.flatMap(find) {
-            ItemInspector(item: item)
-        } else {
-            ContentUnavailableView("No Selection", systemImage: "sidebar.right")
+        Group {
+            if let item = selection.flatMap(find) {
+                ItemInspector(item: item)
+            } else {
+                ContentUnavailableView("No Selection", systemImage: "sidebar.right")
+            }
         }
+        .inspectorColumnWidth(min: 220, ideal: 260, max: 360)  // on the content, or it does nothing
     }
-    .inspectorColumnWidth(min: 220, ideal: 260, max: 360)
 ```
 
 ## Popover

@@ -131,7 +131,7 @@ Done when this finds no hits outside the token files:
 
 ```bash
 grep -rnE 'cornerRadius: [0-9]{1,2}\b|duration: [0-9]|\.spring\(response|\.snappy\b|\.easeInOut|\.easeOut\(|Color\(hex:|Color\(red:' Sources/ \
-  | grep -v 'Path(roundedRect'
+  | grep -v 'Path(roundedRect' | grep -v -E 'UI/(Theme|AppearanceSettings)\.swift'
 ```
 
 (hex strings in data and comments are fine), and DESIGN-SYSTEM.md has a section

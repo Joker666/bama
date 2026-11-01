@@ -95,7 +95,7 @@ struct VolumeDial: View {
         Circle()
             .trim(from: 0, to: level)
             .stroke(.tint, lineWidth: 6)
-            .frame(width: 44, height: 44)
+            .frame(width: 28, height: 28)
             .gesture(DragGesture().onChanged { drag in
                 level = min(1, max(0, level - drag.translation.height / 400))
                 announce()

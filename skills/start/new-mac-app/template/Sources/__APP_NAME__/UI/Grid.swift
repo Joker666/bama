@@ -102,7 +102,7 @@ private struct GridProbeModifier: ViewModifier {
     }
 }
 
-/// Draws the 8 pt grid, each area's inset, and each probe over the window.
+/// Draws a line every 8 pt (two 4 pt steps), each area's inset, and each probe over the window.
 struct GridOverlay: View {
     static let enabled = ProcessInfo.processInfo.environment["APP_GRID"] == "1"
 

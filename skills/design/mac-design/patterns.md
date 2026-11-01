@@ -1,6 +1,6 @@
 # SwiftUI patterns for macOS
 
-Code that compiles on macOS 26 with Swift 6.2 and main-actor default isolation
+Code for macOS 26 and later. It typechecks with Swift 6.4 (Xcode 27) and main-actor default isolation
 (the `new-mac-app` template). `Item` is the template's SwiftData model. Rename it to yours.
 
 Imports used across these snippets:

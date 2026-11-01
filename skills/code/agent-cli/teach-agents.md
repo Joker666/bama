@@ -57,7 +57,7 @@ Everything else: `<cli> help`, and `<cli> help <command>` for its options.
 | --- | --- |
 | `.claude/skills/<cli>/SKILL.md` in the app's repo | Agents working on the app's code |
 | `~/.claude/skills/<cli>/SKILL.md` | Claude Code in any folder: "add milk to my tasks" works everywhere |
-| `~/.codex/skills/<cli>/SKILL.md` (or `AGENTS.md`) | Codex |
+| `~/.agents/skills/<cli>/SKILL.md` (or `AGENTS.md`) | Codex |
 
 Copy the same file to each place the user wants. Update all of them when a
 command changes.

@@ -8,7 +8,7 @@ here=${0:A:h}
 repo=${here:h}
 out=${1:-/tmp/__APP_NAME__-icon.png}
 ictool="$(xcode-select -p)/../Applications/Icon Composer.app/Contents/Executables/ictool"
-[[ -x "$ictool" ]] || { echo "ictool not found. Install Xcode 26 or later."; exit 1; }
+[[ -x "$ictool" ]] || { echo "ictool not found. Install Xcode 26 or later and select it: sudo xcode-select -s /Applications/Xcode.app"; exit 1; }
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 

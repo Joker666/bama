@@ -105,7 +105,7 @@ snapshot or in the code. Sources are listed at the bottom.
 56. Every screen answers three questions at a glance: Where am I? What can I do? Where can I go? Squint at the snapshot: the most important thing is still the most visible. [WWDC25-359]
 57. Simple is not minimal. Hiding the main actions in one More menu looks clean but is harder to use. [WWDC26-250]
 58. Delight is the sum of the other seven, aimed at one feeling picked in the brief (calm, confident, quick). Never confetti added at the end. [WWDC26-250]
-59. Navigation items are for navigation. No "New..." or other action rows in the sidebar list; actions go in the toolbar and menus. [WWDC25-359]
+59. Navigation items are for navigation. No "New…" or other action rows in the sidebar list; actions go in the toolbar and menus. [WWDC25-359]
 60. A list for few items or long text, a grid for many images with little text. Group big collections by time (Recent), progress (In Progress, Drafts), or relation (Related). [WWDC25-359]
 
 ## Glass, shape, and color (macOS 27)
@@ -122,7 +122,7 @@ snapshot or in the code. Sources are listed at the bottom.
 67. The menu bar follows Apple's order and labels. Window menu even with one window, Show/Hide labels that follow the state, Undo that names the action, "New <Noun>". Full list: [menus.md](menus.md). [HIG The menu bar]
 68. Context menus hide items that do not apply (Cut, Copy, and Paste may stay dimmed), show no shortcuts, keep about three groups with the most frequent first, and go at most one submenu deep. Every context menu command also lives in the menu bar. Exception: a menu bar app's status item menu is its menu bar, so it shows the person's global shortcuts. [HIG Context menus]
 69. Standard keys: Option-Command-F jumps to the search field, Command-Period cancels an operation or an alert, Escape closes. Never add a modifier to an existing shortcut for an unrelated command (Shift-Command-Z is only Redo). Avoid Option or Shift with punctuation keys; they move on other keyboard layouts. [HIG Keyboards]
-70. A push button whose action opens another window or view ends in an ellipsis ("Export..."). At most one or two prominent buttons per view. Switches, checkboxes, and radio buttons never go in a toolbar. [HIG Buttons, HIG Toggles]
+70. A push button whose action opens another window or view ends in an ellipsis ("Export…"). At most one or two prominent buttons per view. Switches, checkboxes, and radio buttons never go in a toolbar. [HIG Buttons, HIG Toggles]
 
 ## Search, tables, and drag
 

@@ -2,7 +2,7 @@
 name: new-mac-app
 description: Create a native macOS SwiftUI app from a working template (Swift package, SwiftData, build script, icon script, snapshot mode, git), with no Xcode GUI. Use when the user wants to start a new Mac app or scaffold a macOS project.
 argument-hint: "<AppName> <bundle-id> [parent-folder]"
-allowed-tools: Bash(*/new-app.sh *) Bash(git *) Bash(swift *) Read Write Edit
+allowed-tools: Bash(*/new-app.sh *) Bash(git *) Bash(swift *) Bash(./build.sh *) Bash(tools/*) Read Write Edit
 ---
 
 # New Mac app
@@ -47,7 +47,12 @@ binary in a real `.app` bundle. An agent can read and edit every file.
    ```bash
    swift --version            # Swift 6.2 or later
    sw_vers -productVersion    # 26.0 or later
+   xcrun --find actool        # prints a path inside Xcode.app
    ```
+
+   If `actool` is not found, Xcode is not selected. SwiftData macros and the
+   icon tools then fail. Ask the user to run
+   `sudo xcode-select -s /Applications/Xcode.app`.
 
    On macOS 15, set `.macOS(.v15)` in `Package.swift` and
    `LSMinimumSystemVersion` to 15 in `Info.plist.in`, and skip Liquid Glass APIs.

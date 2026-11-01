@@ -37,7 +37,7 @@ follow the app's structure, most general first (Mail: Mailbox, Message).
 
 - A verb or verb phrase in title case, no articles: "Add Bookmark".
 - An ellipsis when the command asks for more input before it acts
-  ("Rename...", "Export As...").
+  ("Rename…", "Export As…"). Use the ellipsis character (…), not three dots.
 - A toggled item changes its label with the state ("Show Map", "Hide Map").
   Add a verb when the noun alone is unclear ("Turn Grid On").
 - A checkmark marks an attribute that is on (Bold). Offer one item that
@@ -53,8 +53,7 @@ follow the app's structure, most general first (Mail: Mailbox, Message).
 
 - Few and on purpose: key actions, key features, places, devices, and
   visual ideas (rotate, flip).
-- All items in a group get an icon, or none do. In a group of related items
-  (Copy, Copy Link, Copy as Markdown) only the first gets the symbol.
+- All items in a group get an icon, or none do.
 - No icon when no symbol clearly fits. Use the standard symbols from
   design-rules.md rule 65.
 - In SwiftUI menu bar commands an item shows its icon only with

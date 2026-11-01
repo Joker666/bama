@@ -59,9 +59,8 @@ selected text that nobody asked for, a scroll bar with nothing to scroll,
 and an empty band under short content. The fixes are in `mac-design`,
 "Windows open calm".
 
-To see scroll bars as people with a mouse see them, add
-`-AppleShowScrollBars Always` after the binary path. It changes only this
-run.
+To see scroll bars as people with a mouse see them, run
+`tools/snap.sh -AppleShowScrollBars Always`. It changes only this run.
 
 Always use `APP_STORE` with a path in `/tmp`. Never take snapshots against the
 user's real database in `~/Library/Application Support/<AppName>/`.

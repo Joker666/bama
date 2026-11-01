@@ -56,6 +56,8 @@ final class AppModel {
         let item = Item(title: ItemTitle.clean(title))
         if sidebar == .starred { item.isStarred = true }
         container.mainContext.insert(item)
+        // The id is temporary until the first save, so save before selecting.
+        try? container.mainContext.save()
         selection = item.id
     }
 }

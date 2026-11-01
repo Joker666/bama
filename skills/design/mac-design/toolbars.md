@@ -34,10 +34,10 @@ Placement changed between 26.0 and 26.2: snapshot the toolbar after each OS upda
   main actions never hide in it.
 - Back and Close use the standard symbols (`chevron.backward`, `xmark`), never
   the words.
-- macOS 27 SDK (not checked here): `visibilityPriority(.high)` keeps a key
-  group visible as the window narrows, and `ToolbarOverflowMenu` sends rare
-  items to the overflow menu on purpose. Check whether this ends the "custom
-  item dropped" gotcha below.
+- `.visibilityPriority(.high)` (macOS 26.1 and later) keeps a key item
+  visible as the window narrows. `ToolbarOverflowMenu` is not available on
+  macOS. Whether `visibilityPriority` ends the "custom item dropped" gotcha
+  below is not tested yet.
 
 ## Columns
 

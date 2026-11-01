@@ -21,6 +21,8 @@ if [[ -z "$identity" ]]; then
 fi
 [[ -n "$identity" ]] || identity=-
 
+# SwiftData macros, actool, and ictool come with Xcode, not the Command Line Tools.
+xcrun --find actool >/dev/null 2>&1 || { echo "Select Xcode first: sudo xcode-select -s /Applications/Xcode.app"; exit 1; }
 swift build -c $config --package-path "$here" --scratch-path "$scratch" 2>&1 | grep -E "error|warning|Build complete" | grep -v "^\[" || true
 bin="$scratch/$config/$name"
 [[ -x "$bin" ]] || { echo "build failed"; exit 1; }

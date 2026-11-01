@@ -109,7 +109,8 @@ out of public repos (add `docs/screens/*.png` to `.gitignore`).
 
 ## 6. Turn it into stories
 
-Call the Skill tool with `user-stories`. Every screen in the index ends up
+If `docs/BRIEF.md` is missing, call the Skill tool with `app-brief` first.
+Then call the Skill tool with `user-stories`. Every screen in the index ends up
 linked from at least one story, or listed under `## Dropped`.
 
 Done when INDEX.md has a section per PNG, the three maps exist, and

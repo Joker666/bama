@@ -141,8 +141,10 @@ after they save.
 - `xcrun ictool` is a different tool. Icon Composer's `ictool` lives at
   `$(xcode-select -p)/../Applications/Icon Composer.app/Contents/Executables/ictool`.
 - The icon needs `CFBundleIconName` = `AppIcon` in `Info.plist` and
-  `Assets.car` in `Contents/Resources`. `AppIcon.icns` covers older Finder
-  views and macOS 15.
+  `Assets.car` in `Contents/Resources`. `AppIcon.icns` is the flat fallback
+  for Finder views that read `.icns`.
+- `xcode-select -p` prints `CommandLineTools`: `actool` and `ictool` are
+  missing. Run `sudo xcode-select -s /Applications/Xcode.app`.
 
 Done when `tools/make_icon.sh` succeeds, the contact sheet shows a clear
 glyph in all four looks and at 16 pt, the icon uses no SF Symbol, and the

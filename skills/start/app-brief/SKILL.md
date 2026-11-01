@@ -36,7 +36,8 @@ brief, and note "decided by the agent" next to it.
 1. What do you do today, and which app or habit does it replace?
 2. What are the three things you do most often? These become the main pages.
 3. What data does it hold? Name the nouns: tasks, notes, recipes, invoices.
-4. Is there a reference app you like? Then the `clone` skill comes next.
+4. Is there a reference app you like? If `docs/screens/INDEX.md` is missing,
+   call the Skill tool with `clone` after this brief.
 5. Where does it live: a window with a sidebar, a menu bar item, a
    quick-capture panel with a global shortcut, or a mix?
 6. Does it need the internet? Default: no.

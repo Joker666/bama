@@ -61,7 +61,7 @@ struct ItemList: View {
         }
         .navigationTitle(page.title)
         .toolbar {
-            ToolbarItem {
+            ToolbarItem(placement: .primaryAction) {
                 Button("New Item", systemImage: "plus") { model.addItem() }
                     .help("Add an item (Command-N)")
             }

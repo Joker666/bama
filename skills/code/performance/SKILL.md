@@ -29,10 +29,10 @@ reproduce -> measure (release build) -> find the line -> fix -> measure again ->
    | --- | --- |
    | App freezes, spinning pointer | `sample <App> 5`, then read the main thread stack |
    | Slow action | Time Profiler: `xcrun xctrace record --template 'Time Profiler' --attach <App> --time-limit 10s` |
-   | Short freezes while typing or dragging | `--template 'Hangs'` |
+   | Short freezes while typing or dragging | `--template 'Time Profiler'`, look for long main-thread stacks |
    | Stutter while moving or animating | `--template 'Animation Hitches'` |
    | Memory grows | `footprint <App>`, `leaks <App>`, `--template 'Allocations'` |
-   | Fan, battery | `--template 'Energy Log'`, look for timers and polling |
+   | Fan, battery | `--template 'Power Profiler'`, look for timers and polling |
 
    Read traces as text, not in the Instruments GUI: see "Measuring" in
    [recipes.md](recipes.md). Delete every `.trace` after reading. A trace

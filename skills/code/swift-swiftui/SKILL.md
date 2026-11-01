@@ -12,8 +12,9 @@ Skill tool with `mac-design`. For copyable view code, read
 
 ## Concurrency
 
-The template sets main-actor default isolation: every type and function runs
-on the main actor unless you say otherwise. UI code needs no annotations.
+The app target sets main-actor default isolation (the `Kit` target does not):
+app types and functions run on the main actor unless you write
+`nonisolated`. UI code needs no annotations.
 
 | Work | Put it in |
 | --- | --- |
@@ -56,8 +57,9 @@ on the main actor unless you say otherwise. UI code needs no annotations.
 - Every new property has a default value, so existing stores still open.
 - Store at `~/Library/Application Support/<AppName>/`. Allow an override
   (`APP_STORE`) so tests never touch the real data.
-- Give every model its own `uid: UUID`. `persistentModelID` changes on the
-  first save, so it breaks selection and lookups.
+- `persistentModelID` is temporary until the first save, then it changes.
+  Save before you store it (the template's `addItem` does), or select and
+  look up by the model's own `uuid: UUID`.
 - Undo: register the reverse of each action on the window's undo manager.
   SwiftData's automatic undo is not reliable. Code in
   [../../design/mac-design/patterns.md](../../design/mac-design/patterns.md) (Undo with SwiftData).

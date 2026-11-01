@@ -1,7 +1,8 @@
 # Kit parts in SwiftUI
 
-Code for each step of [SKILL.md](SKILL.md). It compiles on macOS 26 with
-Swift 6.2 and main-actor default isolation (the `new-mac-app` template).
+Code for each step of [SKILL.md](SKILL.md). It compiles with Swift 6.4
+(Xcode 27) and main-actor default isolation, next to the `new-mac-app`
+template. `Color(hex:)` comes from the template's `UI/Theme.swift`.
 Rename `Kit` types freely; keep the layers.
 
 ## Contents
@@ -23,8 +24,9 @@ Rename `Kit` types freely; keep the layers.
 ```swift
 import SwiftUI
 
-// Layer 1: raw colors. Only this file reads Palette.
-enum Palette {
+// Layer 1: raw colors. Only this file reads KitPalette.
+// (The template's Theme.swift already has a `Palette` for the accent.)
+enum KitPalette {
     static let gray50 = Color(hex: 0xF9FBFC)
     static let gray900 = Color(hex: 0x202020)
     static let blue100 = Color(hex: 0xDFEDFA)
@@ -35,10 +37,10 @@ enum Palette {
 
 // Layer 2: meaning, with a light and a dark value. Parts read only this.
 enum Ink {
-    static let text = Color(light: Palette.gray900, dark: Palette.snow)
-    static let sidebar = Color(light: Palette.gray50, dark: Palette.night)
-    static let accent = Palette.blue600
-    static let selection = Color(light: Palette.blue100, dark: Palette.blue600.opacity(0.25))
+    static let text = Color(light: KitPalette.gray900, dark: KitPalette.snow)
+    static let sidebar = Color(light: KitPalette.gray50, dark: KitPalette.night)
+    static let accent = KitPalette.blue600
+    static let selection = Color(light: KitPalette.blue100, dark: KitPalette.blue600.opacity(0.25))
 }
 
 // Layer 3: scales.
@@ -54,11 +56,6 @@ enum Motion {
 }
 
 extension Color {
-    init(hex: UInt32) {
-        self.init(.sRGB, red: Double((hex >> 16) & 0xFF) / 255,
-                  green: Double((hex >> 8) & 0xFF) / 255, blue: Double(hex & 0xFF) / 255)
-    }
-
     /// A color that follows light and dark mode.
     init(light: Color, dark: Color) {
         self.init(nsColor: NSColor(name: nil) { appearance in
@@ -315,6 +312,16 @@ drawn shape, in one place.
 enum KitIcon {
     case inbox, today, search, custom(KitGlyph)
 
+    /// Check each name: not every symbol has a .fill variant.
+    var filledSymbol: String? {
+        switch self {
+        case .inbox: "tray.fill"
+        case .today: "calendar"
+        case .search: "magnifyingglass"
+        case .custom: nil
+        }
+    }
+
     var symbol: String? {
         switch self {
         case .inbox: "tray"
@@ -335,7 +342,7 @@ struct KitIconView: View {
             if case .custom(let glyph) = icon {
                 glyph.stroke(style: StrokeStyle(lineWidth: 1.25, lineCap: .round, lineJoin: .round))
             } else if let name = icon.symbol {
-                Image(systemName: filled ? name + ".fill" : name).font(.system(size: size, weight: .light))
+                Image(systemName: filled ? (icon.filledSymbol ?? name) : name).font(.system(size: size, weight: .light))
             }
         }
         .frame(width: size, height: size)
@@ -345,7 +352,8 @@ struct KitIconView: View {
 /// An icon of your own: an SVG path from a 24 x 24 box, scaled to any size.
 /// This one is a tray: copy the numbers from the SVG's `d` attribute.
 struct KitGlyph: Shape {
-    func path(in rect: CGRect) -> Path {
+    // nonisolated: Shape is not main-actor isolated.
+    nonisolated func path(in rect: CGRect) -> Path {
         var path = Path()
         path.move(to: CGPoint(x: 3, y: 13))
         path.addLine(to: CGPoint(x: 8, y: 13))

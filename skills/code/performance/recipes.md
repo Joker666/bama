@@ -27,7 +27,8 @@ bugs in shipped apps.
   `AXUIElementSetMessagingTimeout(AXUIElementCreateSystemWide(), 1.0)` once
   at launch, and never call AX in a loop on the main thread.
 - File, network, and database reads in `body` or `onAppear`. Fix: load in a
-  `.task { }` that awaits a `nonisolated` or `@concurrent` function.
+  `.task { }` that awaits a `@concurrent` function. A plain `nonisolated` function
+  can still run on the main thread.
 
 Find the frozen call:
 
@@ -129,8 +130,7 @@ the new row, save in the background, offer Undo.
   fetch of every object.
 - A `body` that reads thousands of model properties pays observation
   tracking for each one. Map to plain structs for big lists.
-- `persistentModelID` changes on the first save. Select and look up by your
-  own `uid: UUID` property.
+- `persistentModelID` changes on the first save: see `swift-swiftui`, SwiftData.
 
 ## Background work with Swift concurrency
 
@@ -166,15 +166,12 @@ Swift and lie about where the time goes.
 # CPU: where time goes
 xcrun xctrace record --template 'Time Profiler' --attach <AppName> \
   --time-limit 10s --output /tmp/<AppName>.trace
-# Hangs on the main thread
-xcrun xctrace record --template 'Hangs' --attach <AppName> --time-limit 20s \
-  --output /tmp/<AppName>-hangs.trace
 # Memory
 footprint <AppName>
 leaks <AppName>
 ```
 
-Open the `.trace` in Instruments, or export a table:
+Read the trace as text:
 `xcrun xctrace export --input /tmp/<AppName>.trace --toc`.
 
 Add signposts around the work you want to time, so traces show it by name:

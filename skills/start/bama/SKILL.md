@@ -1,6 +1,6 @@
 ---
 name: bama
-description: Build any Mac app. Start here to pick the next skill for a native macOS app.
+description: Router for the BAMA skills that build native macOS apps. Use when the user types /bama, or asks where to start or what comes next.
 disable-model-invocation: true
 ---
 
@@ -45,10 +45,9 @@ view, and the real icon in every snapshot.
 | --- | --- |
 | Decide how a feature works and what it says: names, flow, modals, accessibility | `ux-design` |
 | Make it look and feel like a Mac app | `mac-design` |
-| An accent or brand color, a color picker, tokens | `design-system` |
+| An accent or brand color, a color picker, tokens for colors, radii, and motion | `design-system` |
 | Their own parts and feel, not Apple's: buttons, rows, sidebar, icons | `design-kit` |
 | The look of an app they name, or screenshots of one | `design-from-app` |
-| One set of colors, radii, motion, and controls for the whole app | `design-system` |
 | Fix spacing and alignment, or check the layout on the grid | `layout-grid` |
 | An app icon | `app-icon` |
 

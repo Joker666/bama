@@ -31,7 +31,7 @@ its states.
 
 `DesignKit/Tokens.swift`:
 
-1. **Palette**: raw colors, named by hue and step (`gray50`, `blue600`).
+1. **KitPalette**: raw colors, named by hue and step (`gray50`, `blue600`).
    Only this file reads it.
 2. **Meaning**: `Ink.text`, `Ink.accent`, `Ink.selection`, `Ink.divider`,
    with a light and a dark value each. Parts read only this layer.
@@ -41,7 +41,7 @@ its states.
 A rebrand changes the palette. A dark mode fix changes the meaning layer.
 Neither touches a part.
 
-Check: `grep -rn 'Palette\.' Sources/ | grep -v Tokens.swift` finds nothing.
+Check: `grep -rn 'KitPalette\.' Sources/ | grep -v Tokens.swift` finds nothing.
 
 ## 3. Type
 
@@ -64,7 +64,7 @@ an SF Symbol or a file, so the whole set can change in one place.
 - One size, one stroke weight, one corner style for the whole set.
 - A selected row may switch to the filled form.
 
-Check: `grep -rn 'systemName:' Sources/ | grep -v DesignKit/` finds nothing.
+Check: `grep -rn 'systemName:' Sources/ | grep -v -E 'DesignKit/|UI/(Theme|Grid|AppearanceSettings)\.swift'` finds nothing.
 
 ## 5. Parts
 
@@ -116,7 +116,7 @@ user has seen it.
 
 ```bash
 tools/grid-lint.sh
-grep -rnE 'Color\(hex|Color\(red|\.font\(\.system|systemName:' Sources/ | grep -v DesignKit/
+grep -rnE 'Color\(hex|Color\(red|\.font\(\.system|systemName:' Sources/ | grep -v -E 'DesignKit/|UI/(Theme|Grid|AppearanceSettings)\.swift'
 ```
 
 Both come back clean. Then build, snapshot, and run the `layout-grid`

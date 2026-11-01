@@ -32,6 +32,8 @@ enum SelfTest {
             model.addItem()
             check("New Item adds one item", items().count == before + 1)
             check("the new item is selected", model.selection != nil)
+            try? context.save()
+            check("selection survives a save", items().contains { $0.id == model.selection })
 
             if let item = items().first(where: { $0.id == model.selection }) {
                 item.isStarred.toggle()

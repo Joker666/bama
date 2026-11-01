@@ -9,7 +9,7 @@ import SwiftUI
 //   APP_SEED=1 __APP_NAME__           fill an empty /tmp store with sample items (tools/snap.sh)
 //   __APP_NAME__ --selftest           run the self-test on a /tmp store and quit with 0 or 1 (tools/selftest.sh)
 //   APP_ACCENT=<id> __APP_NAME__      run with another accent from Theme.all (UI/Theme.swift)
-//   APP_GRID=1 __APP_NAME__           draw the 8 pt grid and the layout probes over the window
+//   APP_GRID=1 __APP_NAME__           draw grid lines every 8 pt and the layout probes over the window
 
 @main
 struct __APP_NAME__App: App {
