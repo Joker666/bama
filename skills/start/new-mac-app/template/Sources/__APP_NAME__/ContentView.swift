@@ -63,7 +63,7 @@ struct ItemList: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button("New Item", systemImage: "plus") { model.addItem() }
-                    .help("Add an item (Command-N)")
+                    .help("Add an item (⌘N)")
             }
         }
     }

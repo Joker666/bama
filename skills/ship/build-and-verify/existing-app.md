@@ -102,14 +102,8 @@ not a view).
 ## Self-test in a running app
 
 Make the self-test a bridge command that prints PASS or FAIL per check.
-Checks worth adding to any app:
-
-- Every action's Shortcuts title equals its menu title.
-- Every SF Symbol name exists: `NSImage(systemSymbolName:accessibilityDescription:) != nil`.
-- Every URL action name round-trips through the URL handler.
-- **Smoke step**: start every background timer, sampler, and observer for a
-  few seconds, then print PASS. Only this catches crashes on background
-  queues (see Moving to Swift 6).
+Which checks to add: `test-mac-app`, "Self-test". The smoke step matters
+most here: it catches crashes on background queues (see Moving to Swift 6).
 
 ## Moving to Swift 6
 

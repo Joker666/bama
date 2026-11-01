@@ -20,7 +20,7 @@ skill's template, and the layout file line from its `Snapshot.swift`.
    `md 12`, `lg 16`, `xl 20`, `xxl 24`, `section 32`. Raw numbers are
    0, 1, 2, or a multiple of 4.
 2. Pages and windows have a 20 pt margin (`Space.margin`). Cards pad 16
-   (`Space.lg`). Related controls sit 8 apart, groups 20 to 24, sections 32.
+   (`Space.lg`). Related controls sit 8 apart, groups 20, sections 32.
 3. Each column has one leading edge. Titles, text, cards, and buttons in a
    column start on the same x. Indent on purpose, by a step of the scale.
 4. Let containers do the aligning:

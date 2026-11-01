@@ -112,7 +112,9 @@ Icon/AppIcon.icon/
 
    Read the PNG. It shows Default, Dark, Tinted, and Clear at 256 pt, then
    Default at 32 and 16 pt. The glyph reads in every look and is still
-   recognizable at 16 pt. If not, make it bigger, bolder, or simpler.
+   recognizable at 16 pt. If not, make it bigger, bolder, or simpler. The
+   sheet shows the macOS 27 look. Run `ICON_GENERATION=26 tools/icon_review.sh`
+   too, because the app also runs on macOS 26.
 
 5. Iterate two or three times. Change one thing per round: glyph size,
    layer opacity, background color.

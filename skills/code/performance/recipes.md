@@ -10,6 +10,7 @@ bugs in shipped apps.
 - Drawing: let the GPU composite
 - Images
 - Lists and SwiftUI updates
+- SwiftData
 - Background work with Swift concurrency
 - Timers, polling, and energy
 - Measuring
@@ -108,9 +109,7 @@ the new row, save in the background, offer Undo.
 
 ## Lists and SwiftUI updates
 
-- Never `ForEach($array)` over data the user can delete. A row can read an
-  index that no longer exists and crash. Iterate values, and look up a
-  binding by id.
+- `ForEach($array)` over deletable data crashes: see `swift-swiftui`.
 - Live lists (search results, a window switcher) do not animate. Speed wins
   over motion. Rows cross-fade in place at most.
 - One `@Observable` model per area. A view reads only the properties it
@@ -134,15 +133,10 @@ the new row, save in the background, offer Undo.
 
 ## Background work with Swift concurrency
 
-The template uses main-actor default isolation: everything runs on the main
-actor unless you say otherwise.
-
-- Heavy pure work: a `nonisolated` function marked `@concurrent` runs on the
-  shared pool. Await it from the view or model.
-- Shared mutable state used off the main thread: an `actor`.
-- `Task.detached` only when the work must not inherit the caller's actor or
-  priority.
-- Hand results back to the main actor before you touch UI state.
+Where each kind of work goes: `swift-swiftui`, Concurrency. In short, heavy
+pure work goes in a `@concurrent` function, and results come back to the
+main actor before they touch UI state. Use `Task.detached` only when the
+work must not inherit the caller's actor or priority.
 
 ## Timers, polling, and energy
 

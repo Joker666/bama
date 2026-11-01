@@ -42,10 +42,8 @@ SwiftData database and no server.
 
 ## Skills
 
-The bama plugin has a skill for each step: `mac-design` (design rules),
-`design-system` (accent and tokens), `layout-grid`, `ux-design`,
-`swift-swiftui`, `os-integrations`, `performance`, `build-and-verify`,
-`test-mac-app`, `app-icon`, `user-stories`, and `improve-loop`. Use them.
+The bama plugin has a skill for each step. Call the Skill tool with `bama`
+to pick the next one.
 
 ## Git
 

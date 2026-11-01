@@ -54,9 +54,6 @@ binary in a real `.app` bundle. An agent can read and edit every file.
    icon tools then fail. Ask the user to run
    `sudo xcode-select -s /Applications/Xcode.app`.
 
-   On macOS 15, set `.macOS(.v15)` in `Package.swift` and
-   `LSMinimumSystemVersion` to 15 in `Info.plist.in`, and skip Liquid Glass APIs.
-
 2. Pick the name (one UpperCamelCase word) and bundle id (reverse DNS). If
    `docs/BRIEF.md` exists, use its name.
 

@@ -59,6 +59,7 @@ struct GeneralSettings: View {
     var body: some View {
         Section("Items") {
             Toggle("Ask before deleting items", isOn: $confirmDelete)
+                .controlSize(.mini)
         }
     }
 }

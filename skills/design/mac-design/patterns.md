@@ -111,7 +111,7 @@ struct QuickCaptureField: View {
 
 ## Commands that reach the focused window
 
-Menu commands act on whatever the focused window has selected. Add `.commands { ItemCommands() }` to the scene and `.focusedSceneValue(\.selectedItem, ...)` in the view.
+Menu commands act on whatever the focused window has selected. Add `.commands { ItemCommands() }` to the scene and `.focusedSceneValue(\.selectedItem, ...)` in the view. With one main window, passing the model into the commands is simpler (`swift-swiftui`, "Menu commands").
 
 ```swift
 struct SelectedItemKey: FocusedValueKey { typealias Value = Item }
@@ -188,7 +188,7 @@ NavigationSplitView {
                     Label(model.showInspector ? "Hide Inspector" : "Show Inspector",
                           systemImage: "sidebar.trailing")
                 }
-                .help("Show or hide the inspector (Control-Command-I)")
+                .help("Show or hide the inspector (⌃⌘I)")
             }
         }
 }
@@ -243,7 +243,7 @@ struct SearchableList: View {
         .toolbar {
             ToolbarItem {
                 Button("Inspector", systemImage: "sidebar.trailing") { showInspector.toggle() }
-                    .help("Show or hide details (Control-Command-I)")
+                    .help("Show or hide details (⌃⌘I)")
                     // Same key as InspectorCommands(). Use one or the other, not both.
                     .keyboardShortcut("i", modifiers: [.command, .control])
             }

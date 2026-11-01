@@ -6,12 +6,13 @@ allowed-tools: Bash(./build.sh*) Bash(swift *) Bash(tools/*) Bash(*/Contents/Mac
 
 # Build and verify
 
-A change is done when four things are true:
+A change is done when five things are true:
 
 1. `./build.sh` finishes with no errors.
 2. You looked at the light and dark snapshots of every page you touched.
 3. The snapshots match what the user story or reference screenshot asks for.
 4. The grid checks pass (`layout-grid` skill).
+5. `tools/selftest.sh` exits 0, with a check for each new action.
 
 App not made from the `new-mac-app` template (Xcode, XcodeGen, a menu bar
 utility, Swift 5)? Map the commands below with
@@ -35,9 +36,9 @@ created it, run `swift package clean --scratch-path ~/Library/Developer/<AppName
 
 ## 2. Snapshot
 
-Run the installed binary directly with a test database and a folder for the
-images. The app opens, walks through every sidebar page and every Settings
-tab in light and dark mode, saves one PNG per page and mode, and quits.
+Run `tools/snap.sh`. The app opens on a test store with sample data, walks
+through every sidebar page and every Settings tab in light and dark mode,
+saves one PNG per page and mode, and quits.
 
 ```bash
 tools/snap.sh
@@ -45,11 +46,6 @@ tools/snap.sh
 # ...
 # SNAPSHOT done /tmp/<AppName>-shots
 ```
-
-`tools/snap.sh` deletes the old test store (with its `-wal` and `-shm`
-files) and the saved window state first, then runs with sample data
-(`APP_SEED=1`). Without that, seed data goes stale, and one crashed run
-leaves a "reopen windows?" alert that hangs every later run.
 
 Use `APP_SNAPSHOT_PAGES=today,inbox` to limit the pages. Add `settings` to
 include the Settings tabs.
@@ -133,13 +129,9 @@ an inactive window does not count as reviewed. Run the snapshots again
 while nobody else uses the screen, and do not "fix" dim text you only see
 there.
 
-### Debug output and private screens
+### Private screens
 
-A GUI app started with its output going to a file buffers `print`, and the
-lines are lost when the process is killed. Write debug lines to stderr
-(`FileHandle.standardError.write`) behind an environment flag.
-
-Do not take full-screen captures to check your app: they show the user's
+For debug lines, see `test-mac-app`, "Debug output". Do not take full-screen captures to check your app: they show the user's
 other windows. Capture your own window, or add a mode to the app that
 renders the state you want to see (prefilled text, an open sheet).
 
@@ -149,4 +141,4 @@ When the build is clean and the snapshots look right, commit with a message
 that says what the user can now do: "Add tasks from the quick-add panel",
 not "Update views".
 
-Done when the four conditions at the top hold and the change is committed.
+Done when the five conditions at the top hold and the change is committed.

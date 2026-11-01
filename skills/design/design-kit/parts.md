@@ -258,6 +258,7 @@ struct KitRowStyle: ButtonStyle {
         let isSelected: Bool
         @Environment(\.forcedPartState) private var forced
         @Environment(\.isEnabled) private var isEnabled
+        @Environment(\.appearsActive) private var appearsActive
         @State private var hovering = false
 
         var body: some View {
@@ -269,7 +270,7 @@ struct KitRowStyle: ButtonStyle {
                 .foregroundStyle(state == .selected ? Ink.accent : Ink.text)
                 .padding(.horizontal, Metric.rowInset)
                 .frame(maxWidth: .infinity, minHeight: Metric.rowHeight, alignment: .leading)
-                .background(shape.fill(state == .selected ? Ink.selection
+                .background(shape.fill(state == .selected ? Ink.selection.opacity(appearsActive ? 1 : 0.5)
                     : state == .hover || state == .pressed ? Ink.selection.opacity(0.5) : .clear))
                 .overlay(shape.strokeBorder(Ink.accent, lineWidth: state == .focused ? 2 : 0))
                 .opacity(state == .disabled ? 0.4 : 1)
@@ -342,7 +343,7 @@ struct KitIconView: View {
             if case .custom(let glyph) = icon {
                 glyph.stroke(style: StrokeStyle(lineWidth: 1.25, lineCap: .round, lineJoin: .round))
             } else if let name = icon.symbol {
-                Image(systemName: filled ? (icon.filledSymbol ?? name) : name).font(.system(size: size, weight: .light))
+                Image(systemName: filled ? (icon.filledSymbol ?? name) : name).font(.system(size: size, weight: .regular))  // match the reference
             }
         }
         .frame(width: size, height: size)

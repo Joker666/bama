@@ -9,7 +9,7 @@ snapshot or in the code. Sources are listed at the bottom.
 2. Use standard structures first: `NavigationSplitView`, `.toolbar`, `.searchable`, `.inspector`, `Settings`. They adopt Liquid Glass automatically. [WWDC25-323]
 3. Global actions in the toolbar, navigation in the sidebar, content in the center. [Kole Jain, HIG]
 4. No sidebar when navigation is one level. Give the width to content. [Kole Jain]
-5. Sidebar: at most two levels, an SF Symbol per item, hideable, nothing critical at the bottom. [HIG Sidebars]
+5. Sidebar: at most two levels, a familiar SF Symbol per item, hideable, nothing critical at the bottom. Sidebar icons follow the accent color, and the system accent when people pick one. A fixed icon color only where it carries meaning, like Mail's yellow VIP star. [HIG Sidebars]
 6. Selection details in a trailing inspector or detail column. [Kole Jain, WWDC25-323]
 7. Design the entry points outside the main window: quick-capture panel, menu bar extra, global shortcut, drag and drop. [Kole Jain]
 8. Quick-capture panels have no title bar, one input, and buttons labelled with their shortcuts. Escape closes, Return saves. [Kole Jain]

@@ -88,7 +88,7 @@ On macOS 26 toolbar items float on Liquid Glass, and neighbors share one capsule
 - A symbol first. Text only when no symbol fits ("Edit"). Write
   `Button("Title", systemImage:)` so the title shows in the overflow menu, in
   Icon and Text mode, and to VoiceOver.
-- Every item has `.help`: what it does, starting with a verb, then the shortcut ("Create a note (Command-N)"). Not the item's name again.
+- Every item has `.help`: what it does, starting with a verb, then the shortcut as the menu shows it ("Create a note (⌘N)"). Not the item's name again.
 - A text button next to a symbol button gets a `ToolbarSpacer(.fixed)` between them.
 - A primary action (Done, Send) is one item, trailing, alone, prominent. Most
   main windows have none. "New" is not a primary action.
@@ -156,7 +156,7 @@ struct ContentView: View {
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button("New Note", systemImage: "square.and.pencil") { library.addNote() }
-                            .help("Create a note (Command-N)")
+                            .help("Create a note (⌘N)")
                     }
                 }
         } detail: {
@@ -167,7 +167,7 @@ struct ContentView: View {
                     ToolbarSpacer(.fixed)
                     ToolbarItem {
                         Button("Flag", systemImage: "flag") { library.toggleFlag() }
-                            .help("Flag the selected note (Shift-Command-L)")
+                            .help("Flag the selected note (⇧⌘L)")
                     }
                 }
         }
@@ -178,7 +178,7 @@ struct ContentView: View {
                     ToolbarSpacer(.flexible)  // keeps the toggle in place, open or closed
                     ToolbarItem {
                         Button("Inspector", systemImage: "sidebar.trailing") { library.showInspector.toggle() }
-                            .help("Show or hide the inspector (Control-Command-I)")
+                            .help("Show or hide the inspector (⌃⌘I)")
                     }
                 }
         }

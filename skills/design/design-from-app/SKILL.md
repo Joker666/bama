@@ -68,7 +68,7 @@ from a command.
 - Text sizes come from step 6: build, measure the same word in both
   images, scale.
 - Icons: note the size, stroke weight, corners, and whether selected rows
-  switch to a filled form. Match with SF Symbols at a light weight first;
+  switch to a filled form. Match with SF Symbols at the reference's weight first;
   draw the ones that do not match as shapes (`design-kit` parts.md, Icons).
 
 Check: `design/KIT.md` names the font, the icon source, and the icon size

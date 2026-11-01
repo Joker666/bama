@@ -116,5 +116,5 @@ Each story is a separate commit, so the user can review the history in the
 morning and revert anything they do not like.
 
 Done when every story in the milestone is `done` or named in the report as
-blocked with a reason, each done story has its own commit, and the user
+blocked with a reason, each done story has its own commit (M1 may share one), and the user
 has the report.

@@ -26,7 +26,7 @@ follow the app's structure, most general first (Mail: Mailbox, Message).
 
 | Menu | What goes there |
 |---|---|
-| App | About <App> (name of 16 characters or fewer, no version), Settings... (Command-comma), app items, Services, Hide, Hide Others, Show All, Quit |
+| App | About <App> (name of 16 characters or fewer, no version), Settings… (Command-comma), app items, Services, Hide, Hide Others, Show All, Quit |
 | File | New <Noun> ("New Event", never just "New"), Open..., Open Recent (names, not paths, plus Clear Menu), Close, Duplicate rather than Save As, Rename..., Move To..., Export As... only for other formats. An app without files renames or drops File |
 | Edit | Undo and Redo that name the action ("Undo Typing", "Redo Paste"), Cut, Copy, Paste, Delete (never Erase or Clear), Select All, Find. The system adds Dictation and Emoji |
 | View | Show/Hide Sidebar, Show/Hide Toolbar, Show/Hide Inspector, Enter Full Screen. Keep View even when it only holds Enter Full Screen |

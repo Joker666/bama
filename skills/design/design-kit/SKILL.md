@@ -38,6 +38,10 @@ its states.
 3. **Scales**: `KitType` (type roles), `Metric` (sizes), `Motion`
    (named intents like `hover` and `check`).
 
+The kit's accent replaces the Settings accent picker. To keep the picker,
+set `Ink.accent = Palette.accent` (the template's `UI/Theme.swift`).
+Otherwise remove the Appearance tab's picker.
+
 A rebrand changes the palette. A dark mode fix changes the meaning layer.
 Neither touches a part.
 
@@ -57,8 +61,8 @@ Check: views set fonts only through `.kitType(...)`.
 Icons decide the feel more than color does. Views name a `KitIcon`, never
 an SF Symbol or a file, so the whole set can change in one place.
 
-- Start from SF Symbols at a fixed size and weight. Light weights read
-  less like Apple.
+- Start from SF Symbols at one fixed size and weight: regular, Apple's
+  default, unless the reference app uses a lighter one.
 - For a set of your own, draw each icon as a SwiftUI `Shape` from its SVG
   path, or make custom symbols in the SF Symbols app.
 - One size, one stroke weight, one corner style for the whole set.
@@ -92,8 +96,7 @@ them. SwiftUI cannot move the traffic lights; a small `NSViewRepresentable`
 reaches the `NSWindow` (parts.md, Window chrome).
 
 A custom sidebar matches the macOS 27 system one where people would
-notice: the selected row's text turns semibold, the selection fill dims
-when the window is inactive (`@Environment(\.appearsActive)`), and row
+notice: the selection fill dims when the window is inactive (`@Environment(\.appearsActive)`), and row
 corners stay concentric with the sidebar (mac-design patterns.md, "Custom
 chrome that follows the window"). Custom glass bounces on click only on
 controls.

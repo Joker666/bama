@@ -115,9 +115,8 @@ A to-do app lives in its quick-add panel.
   and labels: [menus.md](menus.md).
 - Menu icons only on key actions, all or none in a group.
 - Standard shortcuts keep their meaning: Command-C, V, X, Z, W, Q, N, comma.
-- Disable menu items that do not apply; keep them visible. SwiftUI menus
-  only update when the selection is passed into the commands from the App
-  (`swift-swiftui`, "Menu commands").
+- Disable menu items that do not apply, but keep them visible. How
+  commands read the selection: `swift-swiftui`, "Menu commands".
 - Window titles name the content ("Today"), not the app.
 
 ## Windows open calm

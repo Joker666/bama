@@ -162,17 +162,15 @@ after touching commands.
 
 ### Runs that never hang
 
-- Quit through `NSApp.terminate`, with the exit code set in
-  `applicationWillTerminate`. Close open sheets first, or terminate is
-  refused and the run waits forever.
-- Before each run, delete `~/Library/Saved Application State/<bundle id>.savedState`.
-  After a crash, the next launch shows a "reopen windows?" alert that
-  blocks every later run with no output. Do not use
-  `-ApplePersistenceIgnoreState`: SwiftUI then opens no window at all.
-- Delete the old test store and its `-wal` and `-shm` files before a
-  seeded run. Seed data only fills an empty store.
-- Print line-buffered (`setvbuf(stdout, nil, _IOLBF, 0)`), so a crash
-  keeps the PASS lines before it.
+The template's scripts and `SelfTest.swift` already do this. In another
+app:
+
+- Quit through `NSApp.terminate` after you end open sheets. An open sheet
+  refuses terminate, and the run waits forever.
+- Before each run, delete `~/Library/Saved Application State/<bundle id>.savedState`
+  and the test store with its `-wal` and `-shm` files. Do not use
+  `-ApplePersistenceIgnoreState`: SwiftUI then opens no window.
+- Print line-buffered (`setvbuf(stdout, nil, _IOLBF, 0)`).
 
 ## 3. Debug bridge
 

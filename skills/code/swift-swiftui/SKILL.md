@@ -68,13 +68,16 @@ app types and functions run on the main actor unless you write
 
 ## Menu commands
 
-SwiftUI `Commands` do not observe `@Observable` models, so a title or a
-`.disabled(...)` that reads the model goes stale. In testing, neither
-`@FocusedValue` (from `.focusedSceneValue`) nor an `@ObservedObject` inside
-the commands updated reliably: the menu stayed disabled with a row
-selected. What works: mirror the selection into a small `ObservableObject`,
-observe it in the `App`, and pass the values into the commands. The App's
-body then rebuilds the menus when they change.
+Tested on macOS 27 with Xcode 27.2. A menu title or `.disabled(...)`
+follows the selection in both of these:
+
+- One main window: pass the `@Observable` model into the commands
+  (`.commands { ItemCommands(model: model) }`). This stays correct while
+  the app is in the background.
+- Several windows: `@FocusedValue` from `.focusedSceneValue`
+  (mac-design patterns.md, "Commands that reach the focused window"). It
+  is `nil` while the app is in the background, so check menu state with
+  the app in front.
 
 ```swift
 @MainActor final class MenuState: ObservableObject {
