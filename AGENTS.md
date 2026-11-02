@@ -46,4 +46,5 @@ Follow Matt Pocock's `writing-for-agents` rules:
 2. Add it to `plugin.json` `skills`, the README table, and the router
    (`skills/start/bama/SKILL.md`).
 3. Run `claude plugin validate . --strict`.
-4. Keep `version` in `plugin.json` at 1.0.0 until the first release. After that, bump it, so installed copies update.
+4. Bump the patch `version` in `plugin.json` in every pushed change.
+   `claude plugin update` skips a version it already has.

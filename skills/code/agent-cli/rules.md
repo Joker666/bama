@@ -95,6 +95,11 @@ of Optical Flow and Onyx.
   SwiftUI menu commands do not redraw after launch, so Edit > Undo and the
   item menus stay in their launch state. Make those AppKit menu items that
   validate (`NSMenuItemValidation`), and check them after an agent write.
+  If SwiftUI owns the Edit menu, it rebuilds that menu on the first
+  shortcut after the app becomes active and drops the items you added, so
+  the first ⌘Z does nothing. Override `performKeyEquivalent` in your windows
+  to match those items' shortcuts after `super`, and add the items again
+  after each rebuild.
 - Register an undoable write's Undo inside the command. Work that registers
   later, such as after an animation, falls outside the router's group, so
   call it without the animation from the CLI.
