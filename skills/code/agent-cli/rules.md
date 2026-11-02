@@ -91,6 +91,13 @@ of Optical Flow and Onyx.
   method as the window, and that method registers Undo (the template's
   `AppModel.deleteItem`). Mark that command `undoable: true`, so Edit > Undo
   brings back what an agent did on the first click.
+- An app whose windows are all AppKit (a menu bar app, a floating panel):
+  SwiftUI menu commands do not redraw after launch, so Edit > Undo and the
+  item menus stay in their launch state. Make those AppKit menu items that
+  validate (`NSMenuItemValidation`), and check them after an agent write.
+- Register an undoable write's Undo inside the command. Work that registers
+  later, such as after an animation, falls outside the router's group, so
+  call it without the animation from the CLI.
 - Never print secrets (tokens, passwords) in results or errors.
 
 ## Tests

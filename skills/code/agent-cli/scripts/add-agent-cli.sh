@@ -31,9 +31,11 @@ grep -q "^@main" "$src/App.swift" && { echo "could not remove @main from App.swi
 
 # Start the socket first in the main view's .task block, where the template
 # starts seed data, the self-test, and snapshot mode.
-if ! grep -q "AgentSocket.listen" "$src/ContentView.swift" && grep -qE '^\s*\.task \{$' "$src/ContentView.swift"; then
-  perl -0pi -e 's/^(\s*)\.task \{\n/$1.task {\n$1    AgentRouter.model = model\n$1    AgentSocket.listen { AgentRouter.handle(\$0) }\n/m' "$src/ContentView.swift"
-  grep -q "AgentSocket.listen" "$src/ContentView.swift" && started=1
+# An app with no ContentView.swift (AppKit windows only) starts it by hand.
+view="$src/ContentView.swift"
+if [[ -f "$view" ]] && ! grep -q "AgentSocket.listen" "$view" && grep -qE '^\s*\.task \{$' "$view"; then
+  perl -0pi -e 's/^(\s*)\.task \{\n/$1.task {\n$1    AgentRouter.model = model\n$1    AgentSocket.listen { AgentRouter.handle(\$0) }\n/m' "$view"
+  grep -q "AgentSocket.listen" "$view" && started=1
 fi
 
 # build.sh puts the CLI on PATH.
@@ -44,5 +46,5 @@ fi
 
 echo "added the agent CLI to $name as \`$cli\`. Next (agent-cli skill):"
 echo "  3. replace the example commands in $src/Agent/AgentCommands.swift"
-[[ -n "${started:-}" ]] || echo "  4. start the socket in the main view's .task: AgentRouter.model = model; AgentSocket.listen { AgentRouter.handle(\$0) }"
+[[ -n "${started:-}" ]] || echo "  4. start the socket at launch, in the main view's .task or in applicationDidFinishLaunching: AgentRouter.model = model; AgentSocket.listen { AgentRouter.handle(\$0) }"
 echo "  5. ./build.sh, then $cli help"
