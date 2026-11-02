@@ -35,7 +35,8 @@ Read the user stories (`docs/stories/`). Write each thing a person does as
 a command, `<noun> <verb>`, and mark it:
 
 - **read**: `items list`, `items show`, `status`. Safe to run any time.
-- **write**: `items add`, `items update`, `open`. Changes data, can be undone.
+- **write**: `items add`, `items update`, `open`. Changes data or what the
+  window shows. A data change can be undone.
 - **destructive**: `items delete`, `mail send`. Only reports what it would
   do until `--yes` is given.
 

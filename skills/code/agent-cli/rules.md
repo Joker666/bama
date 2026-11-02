@@ -87,8 +87,10 @@ of Optical Flow and Onyx.
   `draft` returns an id and a preview, then `send <id> --yes`.
 - Writes are idempotent where it is cheap: completing a done task returns
   `"changed": false`, not an error.
-- Prefer the Trash and Undo over hard deletes. A command that deletes should
-  call the same code as the window, so Edit > Undo can bring it back.
+- Prefer the Trash and Undo over hard deletes. A write calls the same model
+  method as the window, and that method registers Undo (the template's
+  `AppModel.deleteItem`). Mark that command `undoable: true`, so Edit > Undo
+  brings back what an agent did on the first click.
 - Never print secrets (tokens, passwords) in results or errors.
 
 ## Tests

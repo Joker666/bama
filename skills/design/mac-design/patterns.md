@@ -427,11 +427,11 @@ the reverted values in testing (the next fetch returned the old state).
 @Environment(\.undoManager) private var undoManager
 
 func complete(_ todo: Todo) {
-    let uid = todo.uid                       // your own UUID, stable across saves
+    let uuid = todo.uuid                     // your own UUID, stable across saves
     todo.isDone = true
     try? context.save()
     undoManager?.registerUndo(withTarget: store) { store in
-        store.find(uid)?.isDone = false     // look up again; the object may be new
+        store.find(uuid)?.isDone = false    // look up again, the object may be new
         try? store.context.save()
     }
     undoManager?.setActionName("Complete")

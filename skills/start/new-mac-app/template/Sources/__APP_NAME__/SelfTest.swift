@@ -38,9 +38,16 @@ enum SelfTest {
             if let item = items().first(where: { $0.id == model.selection }) {
                 item.isStarred.toggle()
                 check("starring an item marks it starred", item.isStarred)
-                context.delete(item)
-                try? context.save()
+                let uuid = item.uuid
+                model.deleteItem(item)
                 check("deleting the item removes it", items().count == before)
+                // Undo groups close at the end of the run loop pass, so wait one turn.
+                try? await Task.sleep(for: .milliseconds(100))
+                model.undoManager?.undo()
+                check("Undo brings the deleted item back", items().contains { $0.uuid == uuid })
+                try? await Task.sleep(for: .milliseconds(100))
+                model.undoManager?.redo()
+                check("Redo deletes it again", items().count == before)
             }
             check("titles are cleaned", ItemTitle.clean("  Buy   milk ") == "Buy milk")
 

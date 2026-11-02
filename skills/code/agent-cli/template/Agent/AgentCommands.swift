@@ -66,12 +66,11 @@ enum AgentCommands {
         },
         AgentCommand(name: "items delete", summary: "Delete an item.",
                      params: [.init(name: "id", required: true, positional: true, help: "the item's id")],
-                     example: "__CLI_NAME__ items delete 3f2a9c1e --yes --json", destructive: true) { args, model in
+                     example: "__CLI_NAME__ items delete 3f2a9c1e --yes --json", destructive: true, undoable: true) { args, model in
             let item = try find(try args.required("id"), in: model)
             let shown = item.agentJSON
             guard args.confirmed else { return ["deleted": false, "wouldDelete": shown, "hint": "add --yes to delete it"] }
-            model.container.mainContext.delete(item)
-            try model.container.mainContext.save()
+            model.deleteItem(item)  // the window's code, so Edit > Undo brings it back
             return ["deleted": true, "item": shown]
         },
         AgentCommand(name: "open", summary: "Show a sidebar page in the window.",

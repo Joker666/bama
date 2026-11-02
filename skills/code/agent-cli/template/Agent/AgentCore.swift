@@ -26,6 +26,9 @@ struct AgentCommand {
     var readOnly = false
     /// Removes data or cannot be undone. Without --yes it only reports what it would do.
     var destructive = false
+    /// Registers Undo, like the window's code. The router then closes its undo
+    /// group at once, so Edit > Undo works on the first click.
+    var undoable = false
     var run: (Args, AppModel) throws -> Any
 }
 
@@ -88,13 +91,29 @@ enum AgentRouter {
             }
             guard let model else { throw AgentError.unavailable("the app is still starting. Try again") }
             let args = Args(values: object["args"] as? [String: String] ?? [:])
-            reply = ["ok": true, "result": try command.run(args, model)]
+            let undo = command.undoable ? model.undoManager : nil
+            reply = ["ok": true, "result": try inUndoGroup(undo) { try command.run(args, model) }]
         } catch let error as AgentError {
             reply = error.json
         } catch {
             reply = AgentError.invalid(error.localizedDescription).json
         }
         return JSON.data(reply)
+    }
+
+    /// A socket request is not an event, so the undo manager would leave its
+    /// group open until the next click, and Edit > Undo would need two clicks.
+    /// Only undoable commands get a group: an empty group is a dead Undo step.
+    private static func inUndoGroup<T>(_ undo: UndoManager?, _ body: () throws -> T) rethrows -> T {
+        guard let undo, undo.groupingLevel == 0 else { return try body() }
+        let byEvent = undo.groupsByEvent
+        undo.groupsByEvent = false
+        undo.beginUndoGrouping()
+        defer {
+            undo.endUndoGrouping()
+            undo.groupsByEvent = byEvent
+        }
+        return try body()
     }
 }
 

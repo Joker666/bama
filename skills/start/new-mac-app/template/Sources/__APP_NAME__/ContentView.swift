@@ -4,6 +4,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openSettings) private var openSettings
+    @Environment(\.undoManager) private var undoManager
 
     var body: some View {
         NavigationSplitView {
@@ -14,6 +15,7 @@ struct ContentView: View {
         } detail: {
             ItemDetail()
         }
+        .onAppear { model.undoManager = undoManager }
         .task {
             SeedData.insertIfRequested(into: model)
             SelfTest.runIfRequested(model: model)
@@ -33,7 +35,6 @@ struct ContentView: View {
 
 struct ItemList: View {
     @Environment(AppModel.self) private var model
-    @Environment(\.modelContext) private var context
     @Query(sort: \Item.createdAt, order: .reverse) private var items: [Item]
     let page: SidebarItem
 
@@ -47,7 +48,7 @@ struct ItemList: View {
             Label(item.title, systemImage: item.isStarred ? "star.fill" : "circle")
                 .tag(item.id)
                 .contextMenu {
-                    Button("Delete", role: .destructive) { context.delete(item) }
+                    Button("Delete", role: .destructive) { model.deleteItem(item) }
                 }
         }
         .overlay {

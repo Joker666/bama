@@ -43,6 +43,8 @@ final class AppModel {
     let container: ModelContainer
     var sidebar: SidebarItem? = .all
     var selection: PersistentIdentifier?
+    /// The window's undo manager, so actions here reach Edit > Undo. ContentView sets it.
+    @ObservationIgnored var undoManager: UndoManager?
     /// Settings reopens on the last tab. Test and snapshot runs leave it alone.
     var settingsTab: SettingsTab = SettingsTab(rawValue: UserDefaults.standard.string(forKey: "settings.tab") ?? "") ?? .general {
         didSet { if !Store.isOverridden { UserDefaults.standard.set(settingsTab.rawValue, forKey: "settings.tab") } }
@@ -59,5 +61,28 @@ final class AppModel {
         // The id is temporary until the first save, so save before selecting.
         try? container.mainContext.save()
         selection = item.id
+    }
+
+    /// Deletes an item so that Edit > Undo brings it back. The window and the
+    /// agent CLI both call this. Add each new field to the copy below.
+    func deleteItem(_ item: Item) {
+        let copy = (title: item.title, notes: item.notes, isStarred: item.isStarred,
+                    createdAt: item.createdAt, uuid: item.uuid)
+        if selection == item.id { selection = nil }
+        container.mainContext.delete(item)
+        try? container.mainContext.save()
+        undoManager?.registerUndo(withTarget: self) { model in
+            let restored = Item(title: copy.title)
+            restored.notes = copy.notes
+            restored.isStarred = copy.isStarred
+            restored.createdAt = copy.createdAt
+            restored.uuid = copy.uuid
+            model.container.mainContext.insert(restored)
+            try? model.container.mainContext.save()
+            model.selection = restored.id
+            // Registering inside an undo makes this the redo.
+            model.undoManager?.registerUndo(withTarget: model) { $0.deleteItem(restored) }
+        }
+        undoManager?.setActionName("Delete Item")
     }
 }
